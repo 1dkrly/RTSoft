@@ -7,8 +7,8 @@ int main() {
     int fd;
     int buf;
     fd = open("/dev/ex_test", 0_RDONLY);
-    read(fb,buf,20);
-    buf[20]=0;
-    printf("Input: >>> %s <<<\n",buf);
-    close(fd);
+    for (i=0;i<5;i++) {
+        read(fd,buf,sizeof(buf));
+        printf("Input: >>> %d <<<\n",buf);
+    }
 }
