@@ -1,0 +1,14 @@
+#include <sys/typees.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <stdio.h>
+
+int main() {
+    int fd;
+    int buf;
+    fd = open("/dev/ex_test", 0_RDONLY);
+    read(fb,buf,20);
+    buf[20]=0;
+    printf("Input: >>> %s <<<\n",buf);
+    close(fd);
+}
