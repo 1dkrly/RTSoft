@@ -12,18 +12,19 @@ void recogniseStickersByThreshold(Mat image,vector<Rect> &stickers) {
     Scalar min_max_scals[4] = { Scalar(12,50,220), Scalar(16,255,255), Scalar(25,0,100), Scalar(60,80,255)};
     // Выделение подходящих по цвету областей. Цвет задается константой :)
     for (int i=0; i<4; i+=2) {
-    inRange(image_hsv, min_max_scals[i], min_max_scals[i+1], tmp_img);
-   
-    // "Замазать" огрехи в при выделении по цвету
-    dilate(tmp_img,tmp_img,Mat(),Point(-1,-1),3);
-    erode(tmp_img,tmp_img,Mat(),Point(-1,-1),1);
-    //Выделение непрерывных областей
-    findContours(tmp_img,contours,RETR_EXTERNAL, CHAIN_APPROX_NONE);
-    if (contours.size()==1) {
-    //Для каждой области определяем ограничивающий прямоугольник
-    Rect rect=boundingRect(contours[0]);
-    stickers.push_back(rect);
-    }
+        
+        inRange(image_hsv, min_max_scals[i], min_max_scals[i+1], tmp_img);
+
+        // "Замазать" огрехи в при выделении по цвету
+        dilate(tmp_img,tmp_img,Mat(),Point(-1,-1),3);
+        erode(tmp_img,tmp_img,Mat(),Point(-1,-1),1);
+        //Выделение непрерывных областей
+        findContours(tmp_img,contours,RETR_EXTERNAL, CHAIN_APPROX_NONE);
+        if (contours.size()==1) {
+        //Для каждой области определяем ограничивающий прямоугольник
+        Rect rect=boundingRect(contours[0]);
+        stickers.push_back(rect);
+        }
     }
 }
 
