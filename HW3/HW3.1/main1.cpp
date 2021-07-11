@@ -21,12 +21,12 @@ void recogniseStickersByThreshold(Mat &image,vector<vector<Point>> &Line1, vecto
     findContours(tmp_img,contours,RETR_EXTERNAL, CHAIN_APPROX_NONE);
     if (contours.size()==1) {
     //Для каждой области определяем ограничивающий прямоугольник
-    Rect br=boundingRect(contours[0]);
-    int x1 = br.x;
-    int y1 = br.y;
+    Rect rect=boundingRect(contours[0]);
+    int x1 = rect.x;
+    int y1 = rect.y;
 
-    int w = br.width;
-    int h = br.height;
+    int w = rect.width;
+    int h = rect.height;
 
     int x4,y2;
     y2 = y1 + h;
@@ -62,7 +62,7 @@ void recogniseStickersByThreshold(Mat &image,vector<vector<Point>> &Line1, vecto
             for (int j=0; j<Line1[i].size()-1;j++)
                 line(image,Line1[i][j+1],Line1[i][j], Scalar(0,0,255),2);
 
-            rectangle(image, br, Scalar(0,255,0),2);
+            rectangle(image, rect, Scalar(0,255,0),2);
             
         }
     }   
